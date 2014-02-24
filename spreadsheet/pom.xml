@@ -4,5 +4,5 @@
   <artifactId>spreadsheet</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>TDD Kata - SpreadSheet Challenge</name>
-  <description>A TDD Kata - A simple SpreadSheet approach for TDD testing	</description>
+  <description>A TDD Kata - A simple SpreadSheet approach for TDD testing</description>
 </project>
