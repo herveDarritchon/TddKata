@@ -18,6 +18,8 @@ import org.junit.Test;
  */
 public class SheetTest {
 
+	private Sheet sheet;
+
 	/**
 	 * @throws java.lang.Exception
 	 */
@@ -37,6 +39,7 @@ public class SheetTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
+		sheet = new Sheet();
 	}
 
 	/**
@@ -51,15 +54,14 @@ public class SheetTest {
 	 */
 	@Test
 	public void testThatCellsAreEmptyByDefault() {
-		Sheet sheet = new Sheet();
 
 		/* Non fluent syntaxe using JUnit */
 		assertEquals("", sheet.get("A1"));
 		assertEquals("", sheet.get("ZX1347"));
-		
+
 		/* Fluent syntaxe using Fest Assert from EasyTesting */
 		assertThat(sheet.get("A2")).isEmpty();
-		assertThat(sheet.get("ZX347")).isEmpty();		
+		assertThat(sheet.get("ZX347")).isEmpty();
 	}
 
 	/**
@@ -67,7 +69,6 @@ public class SheetTest {
 	 */
 	@Test
 	public void testThatTextCellsAreStored() {
-		Sheet sheet = new Sheet();
 		String theCell = "A20";
 
 		sheet.put(theCell, "A string");
