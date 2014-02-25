@@ -48,8 +48,8 @@ public class SheetTest {
 	@Test
 	public void testThatCellsAreEmptyByDefault() {
 		Sheet sheet = new Sheet();
-		assertEquals("", sheet.get("A3"));
-		assertEquals("", sheet.get("ZX347"));
+		assertEquals("", sheet.get("A1"));
+		assertEquals("", sheet.get("ZX1347"));
 	}
 	
 }
