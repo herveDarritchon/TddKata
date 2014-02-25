@@ -81,4 +81,22 @@ public class SheetTest {
 		assertEquals("", sheet.get(theCell));
 	}
 
+	/**
+	 * Test3 : Test that several value can be stored
+	 */
+	@Test
+	public void testThatManyCellsExist() {
+		sheet.put("A1", "First");
+		sheet.put("X27", "Second");
+		sheet.put("ZX901", "Third");
+
+		assertEquals("A1", "First", sheet.get("A1"));
+		assertEquals("X27", "Second", sheet.get("X27"));
+		assertEquals("ZX901", "Third", sheet.get("ZX901"));
+
+		sheet.put("A1", "Fourth");
+		assertEquals("A1 after", "Fourth", sheet.get("A1"));
+		assertEquals("X27 same", "Second", sheet.get("X27"));
+		assertEquals("ZX901 same", "Third", sheet.get("ZX901"));
+	}
 }
