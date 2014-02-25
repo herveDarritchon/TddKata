@@ -9,9 +9,28 @@ package com.hervedarritchon.kata;
  */
 public class Sheet {
 
-	public Object get(String string) {
-		// TODO Auto-generated method stub
-		return "";
+	private String cellValue = "";
+
+	/**
+	 * @return the cellValue
+	 */
+	public String getCellValue() {
+		return cellValue;
 	}
 
+	/**
+	 * @param cellValue the cellValue to set
+	 */
+	public void setCellValue(String cellValue) {
+		this.cellValue = cellValue;
+	}
+
+	public String get(String string) {
+		return this.cellValue;
+	}
+	
+	public void put(String theCell, String value) {
+		this.setCellValue(value);
+	}
+	
 }
