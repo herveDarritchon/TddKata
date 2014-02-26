@@ -3,8 +3,8 @@
  */
 package com.hervedarritchon.kata;
 
+import static org.fest.assertions.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
-import static org.fest.assertions.Assertions.*;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -17,8 +17,6 @@ import org.junit.Test;
  * 
  */
 public class SheetTest {
-
-	private Sheet sheet;
 
 	/**
 	 * @throws java.lang.Exception
@@ -33,6 +31,8 @@ public class SheetTest {
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 	}
+
+	private Sheet sheet;
 
 	/**
 	 * @throws java.lang.Exception
@@ -50,6 +50,10 @@ public class SheetTest {
 	}
 
 	/**
+	 * *** TDD PART 1 ***
+	 */
+
+	/**
 	 * Test1 : Test that new Cells are empty
 	 */
 	@Test
@@ -62,23 +66,6 @@ public class SheetTest {
 		/* Fluent syntaxe using Fest Assert from EasyTesting */
 		assertThat(sheet.get("A2")).isEmpty();
 		assertThat(sheet.get("ZX347")).isEmpty();
-	}
-
-	/**
-	 * Test2 : Test that Cells are storing data
-	 */
-	@Test
-	public void testThatTextCellsAreStored() {
-		String theCell = "A20";
-
-		sheet.put(theCell, "A string");
-		assertEquals("A string", sheet.get(theCell));
-
-		sheet.put(theCell, "A different string");
-		assertEquals("A different string", sheet.get(theCell));
-
-		sheet.put(theCell, "");
-		assertEquals("", sheet.get(theCell));
 	}
 
 	/**
@@ -106,7 +93,7 @@ public class SheetTest {
 	 */
 	@Test
 	public void testThatNumericCellsAreIdentifiedAndStored() {
-		String theCell = "A21";
+		final String theCell = "A21";
 
 		sheet.put(theCell, "X99"); // "Obvious" string
 		assertEquals("X99", sheet.get(theCell));
@@ -125,16 +112,33 @@ public class SheetTest {
 	}
 
 	/**
+	 * Test2 : Test that Cells are storing data
+	 */
+	@Test
+	public void testThatTextCellsAreStored() {
+		final String theCell = "A20";
+
+		sheet.put(theCell, "A string");
+		assertEquals("A string", sheet.get(theCell));
+
+		sheet.put(theCell, "A different string");
+		assertEquals("A different string", sheet.get(theCell));
+
+		sheet.put(theCell, "");
+		assertEquals("", sheet.get(theCell));
+	}
+
+	/**
 	 * Test5 : You can retreive from the Sheet the literal value for editing
 	 */
 	@Test
 	public void testThatWeHaveAccessToCellLiteralValuesForEditing() {
-		String theCell = "A21";
+		final String theCell = "A21";
 
 		sheet.put(theCell, "Some string");
 		assertEquals("Some string", sheet.getLiteral(theCell));
 		assertEquals("Some string", sheet.get(theCell));
-		
+
 		sheet.put(theCell, " 1234 ");
 		assertEquals(" 1234 ", sheet.getLiteral(theCell));
 		assertEquals("1234", sheet.get(theCell));
@@ -142,4 +146,19 @@ public class SheetTest {
 		sheet.put(theCell, "=7"); // Foreshadowing formulas:)
 		assertEquals("=7", sheet.getLiteral(theCell));
 	}
+
+	/**
+	 * *** TDD PART 2 ***
+	 */
+
+	/**
+	 * Test1 : Not a formula spec but a string because of space in front
+	 */
+	@Test
+	public void testFormulaSpec() {
+		sheet.put("B1", " =7"); // note leading space
+		assertEquals("Not a formula", " =7", sheet.get("B1"));
+		assertEquals("Unchanged", " =7", sheet.getLiteral("B1"));
+	}
+
 }

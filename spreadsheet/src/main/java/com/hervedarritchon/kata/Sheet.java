@@ -8,43 +8,45 @@ import java.util.Map;
 
 /**
  * @author ahdi7503
- *
+ * 
  */
 public class Sheet {
 
-	private Map<String,Cell> cells = new HashMap<String,Cell>();
-	
+	private Map<String, Cell> cells = new HashMap<String, Cell>();
+
 	/**
 	 * @return the cells
 	 */
-	public Map<String,Cell> getCells() {
+
+	public String get(final String theCell) {
+		return this.getCells().containsKey(theCell) ? this.getCells()
+				.get(theCell).getCellValue() : "";
+	}
+
+	/**
+	 * @return the cells
+	 */
+	public Map<String, Cell> getCells() {
 		return cells;
 	}
 
-	/**
-	 * @param cells the cells to set
-	 */
-	public void setCells(Map<String,Cell> cells) {
-		this.cells = cells;
+	public Object getLiteral(final String theCell) {
+		return this.getCells().containsKey(theCell) ? this.getCells()
+				.get(theCell).getCellLiteral() : "";
 	}
 
-	/**
-	 * @return the cells
-	 */
-
-	
-	public String get(String theCell) {
-		return this.getCells().containsKey(theCell) ? this.getCells().get(theCell).getCellValue() : "";
-	}
-	
-	public void put(String theCell, String value) {
+	public void put(final String theCell, final String value) {
 		if (this.getCells().containsKey(theCell)) {
 			this.getCells().remove(theCell);
 		}
-		this.getCells().put(theCell, new Cell(value));			
+		this.getCells().put(theCell, new Cell(value));
 	}
 
-	public Object getLiteral(String theCell) {
-		return this.getCells().containsKey(theCell) ? this.getCells().get(theCell).getCellLiteral() : "";
+	/**
+	 * @param cells
+	 *            the cells to set
+	 */
+	public void setCells(final Map<String, Cell> cells) {
+		this.cells = cells;
 	}
 }

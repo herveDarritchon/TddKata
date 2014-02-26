@@ -15,40 +15,10 @@ public class Cell {
 	private String cellLiteral;
 
 	/**
-	 * @return the cellValue
-	 */
-	public String getCellValue() {
-		return cellValue;
-	}
-
-	/**
-	 * @param cellValue
-	 *            the cellValue to set
-	 */
-	public void setCellValue(String cellValue) {
-		this.cellValue = cellValue;
-	}
-
-	/**
-	 * @return the cellLiteral
-	 */
-	public String getCellLiteral() {
-		return cellLiteral;
-	}
-
-	/**
-	 * @param cellLiteral
-	 *            the cellLiteral to set
-	 */
-	public void setCellLiteral(String cellLiteral) {
-		this.cellLiteral = cellLiteral;
-	}
-
-	/**
 	 * @param cellValue
 	 * @param cellLiteral
 	 */
-	public Cell(String cellValue) {
+	public Cell(final String cellValue) {
 		super();
 		this.cellValue = formatValue(cellValue);
 		this.cellLiteral = cellValue;
@@ -60,9 +30,39 @@ public class Cell {
 	 */
 	private String formatValue(String value) {
 		if (StringUtils.isNumeric(StringUtils.deleteWhitespace(value))) {
-			value=StringUtils.deleteWhitespace(value);
+			value = StringUtils.deleteWhitespace(value);
 		}
 		return value;
 	}
-	
+
+	/**
+	 * @return the cellLiteral
+	 */
+	public String getCellLiteral() {
+		return cellLiteral;
+	}
+
+	/**
+	 * @return the cellValue
+	 */
+	public String getCellValue() {
+		return cellValue;
+	}
+
+	/**
+	 * @param cellLiteral
+	 *            the cellLiteral to set
+	 */
+	public void setCellLiteral(final String cellLiteral) {
+		this.cellLiteral = cellLiteral;
+	}
+
+	/**
+	 * @param cellValue
+	 *            the cellValue to set
+	 */
+	public void setCellValue(final String cellValue) {
+		this.cellValue = cellValue;
+	}
+
 }
