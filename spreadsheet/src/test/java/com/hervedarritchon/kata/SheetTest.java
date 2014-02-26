@@ -189,4 +189,14 @@ public class SheetTest {
 		assertEquals("Plus", "5", sheet.get("A1"));
 	}
 
+	/**
+	 * Test4 : Test if the parentheses are open/close (one layer)
+	 */
+	@Test
+	public void testParentheses() {
+		final Sheet sheet = new Sheet();
+		sheet.put("A1", "=(7)");
+		assertEquals("Parends", "7", sheet.get("A1"));
+	}
+
 }

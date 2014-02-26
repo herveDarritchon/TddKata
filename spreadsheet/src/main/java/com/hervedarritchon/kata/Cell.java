@@ -3,6 +3,9 @@
  */
 package com.hervedarritchon.kata;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -58,15 +61,51 @@ public class Cell {
 			result = StringUtils.deleteWhitespace(value);
 		} else if (isCellFormula(value)) {
 			final String formulaBody = StringUtils.removeStart(value, "=");
-			if (StringUtils.contains(result, "*")) {
-				result = computeMultiply(formulaBody);
-			} else if (StringUtils.contains(result, "+")) {
-				result = computeAdd(formulaBody);
-			} else {
-				return formulaBody;
+			final List<String> blocks = splitFormula(formulaBody);
+			for (final String block : blocks) {
+				if (StringUtils.contains(block, "*")) {
+					result = computeMultiply(block);
+				} else if (StringUtils.contains(block, "+")) {
+					result = computeAdd(block);
+				} else {
+					result = block;
+				}
 			}
 		}
 		return result;
+	}
+
+	/**
+	 * Split the formula in several block depending on the parentheses
+	 * 
+	 * @param formulaBody
+	 * @return
+	 */
+	private List<String> splitFormula(final String formulaBody) {
+		final List<String> result = new ArrayList<String>();
+		result.add(cleanParentheses(formulaBody));
+		return result;
+	}
+
+	/**
+	 * Check if parentheses are open and close and delete them or return "".
+	 * 
+	 * @param formulaBody
+	 * @return
+	 */
+	private String cleanParentheses(final String formulaBody) {
+		int open = 0;
+		for (int x = 0; x < open; x++) {
+			if (formulaBody.charAt(x) == '(') {
+				open++;
+			} else if (formulaBody.charAt(x) == ')') {
+				open--;
+			}
+		}
+		if (open != 0) {
+			return "";
+		}
+		return StringUtils.remove(StringUtils.remove(formulaBody, ")"), "(");
 	}
 
 	/**
