@@ -12,30 +12,35 @@ import java.util.Map;
  */
 public class Sheet {
 
-	private Map<String,String> cells = new HashMap<String,String>();
+	private Map<String,Cell> cells = new HashMap<String,Cell>();
 	
 	/**
 	 * @return the cells
 	 */
-	public Map<String,String> getCells() {
+	public Map<String,Cell> getCells() {
 		return cells;
 	}
 
 	/**
 	 * @param cells the cells to set
 	 */
-	public void setCells(Map<String,String> cells) {
+	public void setCells(Map<String,Cell> cells) {
 		this.cells = cells;
 	}
+
+	/**
+	 * @return the cells
+	 */
+
 	
 	public String get(String theCell) {
-		return this.cells.containsKey(theCell) ? this.cells.get(theCell) : "";
+		return this.getCells().containsKey(theCell) ? this.getCells().get(theCell).getCellValue() : "";
 	}
 	
 	public void put(String theCell, String value) {
-		if (this.cells.containsKey(theCell)) {
-			this.cells.remove(theCell);
+		if (this.getCells().containsKey(theCell)) {
+			this.getCells().remove(theCell);
 		}
-		this.cells.put(theCell, value);			
+		this.getCells().put(theCell, new Cell(value));			
 	}
 }
