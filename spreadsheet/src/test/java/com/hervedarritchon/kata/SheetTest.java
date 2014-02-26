@@ -194,9 +194,19 @@ public class SheetTest {
 	 */
 	@Test
 	public void testParentheses() {
-		final Sheet sheet = new Sheet();
 		sheet.put("A1", "=(7)");
 		assertEquals("Parends", "7", sheet.get("A1"));
+		assertEquals("Parends", "=(7)", sheet.getLiteral("A1"));
+	}
+
+	/**
+	 * Test5 : Test if parentheses are open and close in several layer.
+	 */
+	@Test
+	public void testDeepParentheses() {
+		sheet.put("A1", "=((((10))))");
+		assertEquals("Parends", "10", sheet.get("A1"));
+		assertEquals("Parends", "=((((10))))", sheet.getLiteral("A1"));
 	}
 
 }
