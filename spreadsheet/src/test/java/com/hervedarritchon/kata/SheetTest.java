@@ -209,4 +209,14 @@ public class SheetTest {
 		assertEquals("Parends", "=((((10))))", sheet.getLiteral("A1"));
 	}
 
+	/**
+	 * Test6 : Test if you can multiply several times in a formula
+	 */
+	@Test
+	public void testMultiplyMultiple() {
+		final Sheet sheet = new Sheet();
+		sheet.put("A1", "=2*3*4");
+		assertEquals("Times", "24", sheet.get("A1"));
+	}
+
 }
