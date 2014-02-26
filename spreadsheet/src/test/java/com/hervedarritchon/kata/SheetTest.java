@@ -213,10 +213,20 @@ public class SheetTest {
 	 * Test6 : Test if you can multiply several times in a formula
 	 */
 	@Test
-	public void testMultiplyMultiple() {
+	public void testMultiplyMultipleOperator() {
 		final Sheet sheet = new Sheet();
 		sheet.put("A1", "=2*3*4");
 		assertEquals("Times", "24", sheet.get("A1"));
+	}
+
+	/**
+	 * Test7 : Test if you can add several times in a formula
+	 */
+	@Test
+	public void testAddMultipleOperator() {
+		final Sheet sheet = new Sheet();
+		sheet.put("A1", "=71+2+3");
+		assertEquals("Add", "76", sheet.get("A1"));
 	}
 
 }
