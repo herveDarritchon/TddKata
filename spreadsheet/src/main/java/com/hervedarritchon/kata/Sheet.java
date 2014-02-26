@@ -43,4 +43,8 @@ public class Sheet {
 		}
 		this.getCells().put(theCell, new Cell(value));			
 	}
+
+	public Object getLiteral(String theCell) {
+		return this.getCells().containsKey(theCell) ? this.getCells().get(theCell).getCellLiteral() : "";
+	}
 }
