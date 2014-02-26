@@ -53,10 +53,21 @@ public class Cell {
 	 */
 	private String formatValue(final String value) {
 		String result = value;
+
 		if (isCellNumeric(value)) {
 			result = StringUtils.deleteWhitespace(value);
+		} else if (isCellFormula(value)) {
+			result = StringUtils.removeStart(value, "=");
 		}
 		return result;
+	}
+
+	/**
+	 * @param value
+	 * @return
+	 */
+	private boolean isCellFormula(final String value) {
+		return StringUtils.startsWith(value, "=");
 	}
 
 	/**
