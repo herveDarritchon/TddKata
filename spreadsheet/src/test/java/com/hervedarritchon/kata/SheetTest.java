@@ -82,7 +82,7 @@ public class SheetTest {
 	}
 
 	/**
-	 * Test3 : Test that several value can be stored
+	 * Test3 : Test that several value can be stored, one value in each cell
 	 */
 	@Test
 	public void testThatManyCellsExist() {
@@ -99,4 +99,29 @@ public class SheetTest {
 		assertEquals("X27 same", "Second", sheet.get("X27"));
 		assertEquals("ZX901 same", "Third", sheet.get("ZX901"));
 	}
+	
+
+	/**
+	 * Test4 : Numerical cell are identified and stored differently than string cell
+	 */
+	@Test
+	public void testThatNumericCellsAreIdentifiedAndStored() {
+	  String theCell = "A21";
+
+	  sheet.put(theCell, "X99"); // "Obvious" string
+	  assertEquals("X99", sheet.get(theCell));
+
+	  sheet.put(theCell, "14"); // "Obvious" number
+	  assertEquals("14", sheet.get(theCell));
+
+	  sheet.put(theCell, " 99 X"); // Whole string must be numeric
+	  assertEquals(" 99 X", sheet.get(theCell));
+
+	  sheet.put(theCell, " 1234 "); // Blanks ignored
+	  assertEquals("1234", sheet.get(theCell));
+
+	  sheet.put(theCell, " "); // Just a blank
+	  assertEquals(" ", sheet.get(theCell));
+	}
+	
 }
