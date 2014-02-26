@@ -129,7 +129,7 @@ public class SheetTest {
 	}
 
 	/**
-	 * Test5 : You can retreive from the Sheet the literal value for editing
+	 * Test5 : You can retrieve from the Sheet the literal value for editing
 	 */
 	@Test
 	public void testThatWeHaveAccessToCellLiteralValuesForEditing() {
@@ -160,5 +160,16 @@ public class SheetTest {
 		assertEquals("Not a formula", " =7", sheet.get("B1"));
 		assertEquals("Unchanged", " =7", sheet.getLiteral("B1"));
 	}
+
+	/**
+	 * Test2 : Formula, differentiate the value from the literal in a formula
+	 */
+	// @Test
+	// public void testConstantFormula() {
+	// final Sheet sheet = new Sheet();
+	// sheet.put("A1", "=7");
+	// assertEquals("Formula", "=7", sheet.getLiteral("A1"));
+	// assertEquals("Value", "7", sheet.get("A1"));
+	// }
 
 }

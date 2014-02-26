@@ -15,34 +15,6 @@ public class Cell {
 	private String cellLiteral;
 
 	/**
-	 * @param cellValue
-	 * @param cellLiteral
-	 */
-	public Cell(final String cellValue) {
-		super();
-		this.cellValue = formatValue(cellValue);
-		this.cellLiteral = cellValue;
-	}
-
-	/**
-	 * 
-	 * @param value
-	 */
-	private String formatValue(String value) {
-		if (StringUtils.isNumeric(StringUtils.deleteWhitespace(value))) {
-			value = StringUtils.deleteWhitespace(value);
-		}
-		return value;
-	}
-
-	/**
-	 * @return the cellLiteral
-	 */
-	public String getCellLiteral() {
-		return cellLiteral;
-	}
-
-	/**
 	 * @return the cellValue
 	 */
 	public String getCellValue() {
@@ -63,6 +35,43 @@ public class Cell {
 	 */
 	public void setCellValue(final String cellValue) {
 		this.cellValue = cellValue;
+	}
+
+	/**
+	 * @param cellValue
+	 * @param cellLiteral
+	 */
+	public Cell(final String cellValue) {
+		super();
+		this.cellValue = formatValue(cellValue);
+		this.cellLiteral = cellValue;
+	}
+
+	/**
+	 * 
+	 * @param value
+	 */
+	private String formatValue(final String value) {
+		String result = value;
+		if (isCellNumeric(value)) {
+			result = StringUtils.deleteWhitespace(value);
+		}
+		return result;
+	}
+
+	/**
+	 * @param value
+	 * @return
+	 */
+	private boolean isCellNumeric(final String value) {
+		return StringUtils.isNumeric(StringUtils.deleteWhitespace(value));
+	}
+
+	/**
+	 * @return the cellLiteral
+	 */
+	public String getCellLiteral() {
+		return cellLiteral;
 	}
 
 }
