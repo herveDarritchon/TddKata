@@ -57,12 +57,33 @@ public class Cell {
 		if (isCellNumeric(value)) {
 			result = StringUtils.deleteWhitespace(value);
 		} else if (isCellFormula(value)) {
-			result = StringUtils.removeStart(value, "=");
+			result = compute(StringUtils.removeStart(value, "="));
+
 		}
 		return result;
 	}
 
 	/**
+	 * 
+	 * Compute the value from a formula. Operator : *
+	 * 
+	 * @param formula
+	 * @return
+	 */
+	private String compute(final String formula) {
+		final String[] members = StringUtils
+				.splitByWholeSeparator(formula, "*");
+		int result = 1;
+		for (final String member : members) {
+			result *= Integer.parseInt(member);
+		}
+		return Integer.toString(result);
+	}
+
+	/**
+	 * 
+	 * Test if a Cell is a formula.
+	 * 
 	 * @param value
 	 * @return
 	 */
@@ -71,6 +92,9 @@ public class Cell {
 	}
 
 	/**
+	 * 
+	 * Test if a Cell is a numeric.
+	 * 
 	 * @param value
 	 * @return
 	 */

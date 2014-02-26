@@ -166,10 +166,15 @@ public class SheetTest {
 	 */
 	@Test
 	public void testConstantFormula() {
-		final Sheet sheet = new Sheet();
 		sheet.put("A1", "=7");
 		assertEquals("Formula", "=7", sheet.getLiteral("A1"));
 		assertEquals("Value", "7", sheet.get("A1"));
+	}
+
+	@Test
+	public void testMultiply() {
+		sheet.put("A1", "=2*3");
+		assertEquals("Times", "6", sheet.get("A1"));
 	}
 
 }
