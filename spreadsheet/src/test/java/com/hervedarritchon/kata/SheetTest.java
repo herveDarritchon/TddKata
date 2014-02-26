@@ -171,10 +171,22 @@ public class SheetTest {
 		assertEquals("Value", "7", sheet.get("A1"));
 	}
 
+	/**
+	 * Test3.1 : Test a new feature - Formula multiply
+	 */
 	@Test
 	public void testMultiply() {
 		sheet.put("A1", "=2*3");
 		assertEquals("Times", "6", sheet.get("A1"));
+	}
+
+	/**
+	 * Test3.1 : Test a new feature - Formula add
+	 */
+	@Test
+	public void testAdd() {
+		sheet.put("A1", "=2+3");
+		assertEquals("Plus", "5", sheet.get("A1"));
 	}
 
 }

@@ -57,8 +57,14 @@ public class Cell {
 		if (isCellNumeric(value)) {
 			result = StringUtils.deleteWhitespace(value);
 		} else if (isCellFormula(value)) {
-			result = compute(StringUtils.removeStart(value, "="));
-
+			final String formulaBody = StringUtils.removeStart(value, "=");
+			if (StringUtils.contains(result, "*")) {
+				result = computeMultiply(formulaBody);
+			} else if (StringUtils.contains(result, "+")) {
+				result = computeAdd(formulaBody);
+			} else {
+				return formulaBody;
+			}
 		}
 		return result;
 	}
@@ -70,12 +76,29 @@ public class Cell {
 	 * @param formula
 	 * @return
 	 */
-	private String compute(final String formula) {
+	private String computeMultiply(final String formula) {
 		final String[] members = StringUtils
 				.splitByWholeSeparator(formula, "*");
 		int result = 1;
 		for (final String member : members) {
 			result *= Integer.parseInt(member);
+		}
+		return Integer.toString(result);
+	}
+
+	/**
+	 * 
+	 * Compute the value from a formula. Operator : +
+	 * 
+	 * @param formula
+	 * @return
+	 */
+	private String computeAdd(final String formula) {
+		final String[] members = StringUtils
+				.splitByWholeSeparator(formula, "+");
+		int result = 0;
+		for (final String member : members) {
+			result += Integer.parseInt(member);
 		}
 		return Integer.toString(result);
 	}
