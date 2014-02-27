@@ -8,6 +8,8 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.hervedarritchon.math.MathExpression;
+
 /**
  * @author ahdi7503
  * 
@@ -61,16 +63,19 @@ public class Cell {
 			result = StringUtils.deleteWhitespace(value);
 		} else if (isCellFormula(value)) {
 			final String formulaBody = StringUtils.removeStart(value, "=");
-			final List<String> blocks = splitFormula(formulaBody);
-			for (final String block : blocks) {
-				if (StringUtils.contains(block, "*")) {
-					result = computeMultiply(block);
-				} else if (StringUtils.contains(block, "+")) {
-					result = computeAdd(block);
-				} else {
-					result = block;
-				}
-			}
+			final MathExpression formula = new MathExpression();
+			result = formula.computeMathInfixExpression(formulaBody);
+
+			// final List<String> blocks = splitFormula(formulaBody);
+			// for (final String block : blocks) {
+			// if (StringUtils.contains(block, "*")) {
+			// result = computeMultiply(block);
+			// } else if (StringUtils.contains(block, "+")) {
+			// result = computeAdd(block);
+			// } else {
+			// result = block;
+			// }
+			// }
 		}
 		return result;
 	}

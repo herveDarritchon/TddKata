@@ -169,6 +169,11 @@ public class SheetTest {
 		sheet.put("A1", "=7");
 		assertEquals("Formula", "=7", sheet.getLiteral("A1"));
 		assertEquals("Value", "7", sheet.get("A1"));
+
+		sheet.put("A2", "=76");
+		assertEquals("Formula", "=76", sheet.getLiteral("A2"));
+		assertEquals("Value", "76", sheet.get("A2"));
+
 	}
 
 	/**
@@ -227,6 +232,16 @@ public class SheetTest {
 		final Sheet sheet = new Sheet();
 		sheet.put("A1", "=71+2+3");
 		assertEquals("Add", "76", sheet.get("A1"));
+	}
+
+	/**
+	 * Test operator precedence
+	 */
+	@Test
+	public void testPrecedence() {
+		final Sheet sheet = new Sheet();
+		sheet.put("A1", "=7+2*3");
+		assertEquals("Precedence", "13", sheet.get("A1"));
 	}
 
 }
