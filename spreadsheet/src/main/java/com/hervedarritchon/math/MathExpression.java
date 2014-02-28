@@ -103,10 +103,13 @@ public class MathExpression {
 			if (StringUtils.isNumeric(element)) {
 				this.outputQueue.add(element);
 			} else if (isOperator(element)) {
-				if (!this.operatorStack.isEmpty()
-						&& hasPriority(element, this.operatorStack.peek())) {
-					this.outputQueue.add(this.operatorStack.pop());
-					this.operatorStack.push(element);
+				if (!this.operatorStack.isEmpty()) {
+					if (hasPriority(element, this.operatorStack.peek())) {
+						this.operatorStack.push(element);
+					} else {
+						this.outputQueue.add(this.operatorStack.pop());
+						this.operatorStack.push(element);
+					}
 				} else {
 					this.operatorStack.push(element);
 				}
@@ -115,7 +118,7 @@ public class MathExpression {
 			}
 		}
 
-		if (!this.operatorStack.isEmpty()) {
+		while (!this.operatorStack.empty()) {
 			this.outputQueue.add(this.operatorStack.pop());
 		}
 
@@ -134,16 +137,7 @@ public class MathExpression {
 	 */
 	private boolean hasPriority(final String newOperator,
 			final String currentOperator) {
-		boolean priority = false;
-		if (newOperator.contains("*")) {
-			priority = true;
-		} else if (currentOperator.contains("*")) {
-			priority = false;
-		} else if (newOperator.contains("+") && currentOperator.contains("+")) {
-			priority = true;
-		}
-
-		return priority;
+		return Math.checkPrecedence(newOperator, currentOperator);
 	}
 
 	/**
